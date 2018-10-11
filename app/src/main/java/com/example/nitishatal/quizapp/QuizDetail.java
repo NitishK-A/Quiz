@@ -248,7 +248,11 @@ public class QuizDetail extends AppCompatActivity {
                 dataos.writeBytes("\r\n");
                 int bytesAvailable = fileInputStream.available();
 
-                int bufferSize = Math.min(bytesAvailable, 10);//buffer size is 10
+                if(bytesAvailable<10){
+                     buffersize=bytesAvailable;
+                }else{
+                     buffersize=bytesrAvailable;
+                }//max buffer size is 10
                 byte[] buffer = new byte[bufferSize];
 
                 int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
@@ -257,7 +261,11 @@ public class QuizDetail extends AppCompatActivity {
                 while (bytesRead > 0) {
                     dataos.write(buffer, 0, bufferSize);
                     bytesAvailable = fileInputStream.available();
-                    bufferSize = Math.min(bytesAvailable, 10);
+                    if(bytesAvailable<10){
+                     buffersize=bytesAvailable;
+                    }else{
+                        buffersize=bytesrAvailable;
+                    }
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
                     // System.out.println(progress);
                     Log.d("das","progress"+progress);
@@ -271,15 +279,13 @@ public class QuizDetail extends AppCompatActivity {
 
                 // Responses from the server (code and message)
                 serverResponseCode = net.getResponseCode();
-                //      String serverResponseMessage = net.getResponseMessage();
+                
                 if (serverResponseCode == 200) {
                 }
                 fileInputStream.close();
                 dataos.flush();
                 dataos.close();
-                //} catch (Exception e) {
-                //  e.printStackTrace();
-                //}
+                
 
             } catch (Exception ex) {
                 ex.printStackTrace();
