@@ -257,21 +257,12 @@ public class QuizDetail extends AppCompatActivity {
 
                 dataos.writeBytes("\r\n");
                 dataos.writeBytes("--" + "*****" + "--" + "\r\n");
-
-                // Responses from the server (code and message)
-                serverResponseCode = net.getResponseCode();
-                
-                if (serverResponseCode == 200) {
-                }
-                fileInputStream.close();
-                dataos.flush();
-                dataos.close();
-                
-
+                net.getResponseCode();
+           
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            return "Done";
+            return null;
         }
 
         @Override
