@@ -180,7 +180,7 @@ public class QuizDetail extends AppCompatActivity {
 
         }
     }
-  
+
 
 
 
@@ -208,14 +208,10 @@ public class QuizDetail extends AppCompatActivity {
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
                 URL url = new URL(upLoadServerUri);
 
-                        // Open a HTTP connection to the URL
                 HttpURLConnection net = (HttpURLConnection) url.openConnection();
                 net.setDoInput(true);
                 net.setDoOutput(true);
-                //net.setUseCaches(false);
-                net.setRequestMethod("POST");
-                net.setRequestProperty("Connection", "Keep-Alive");
-                net.setRequestProperty("ENCTYPE", "multipart/form-data");
+
                 net.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + "*****");
                 net.setRequestProperty("nitish", sourceFile);
 
