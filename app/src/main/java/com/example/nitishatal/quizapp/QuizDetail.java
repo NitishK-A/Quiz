@@ -180,26 +180,7 @@ public class QuizDetail extends AppCompatActivity {
 
         }
     }
-    public  void isConnected()
-    {
-        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if (connectivityManager!=null)
-            Toast.makeText(getApplicationContext(), " Network Available", Toast.LENGTH_SHORT).show();
-        {
-            NetworkInfo info=connectivityManager.getActiveNetworkInfo();
-            if (info!=null && info.getState()==NetworkInfo.State.CONNECTED)
-            {
-
-                    Toast.makeText(getApplicationContext(), " Network Connected", Toast.LENGTH_SHORT).show();
-                  //  return true;
-
-            }else{
-                Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            }
-        }
-      //  return false;
-    }
+  
 
 
 
