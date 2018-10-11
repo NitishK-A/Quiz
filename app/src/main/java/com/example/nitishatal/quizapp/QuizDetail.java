@@ -220,10 +220,7 @@ public class QuizDetail extends AppCompatActivity {
 
             try {
                 String sourceFile = "/data/data/com.example.nitishatal.quizapp/files/QuizQnA.csv";
-
-
-
-                File csvFile = new File(sourceFile);
+                File csvFile = new File("/data/data/com.example.nitishatal.quizapp/files/QuizQnA.csv");
 
                 String upLoadServerUri = "http://192.168.0.104";
 
@@ -247,8 +244,13 @@ public class QuizDetail extends AppCompatActivity {
                 dataos.writeBytes("Content-Disposition: form-data; name=\"nitish\";filename=\"" + sourceFile + "\"" + "\r\n");
                 dataos.writeBytes("\r\n");
                 int bytesAvailable = fileInputStream.available();
+                int bufferSize;
 
-                int bufferSize = Math.min(bytesAvailable, 10);//buffer size is 10
+                if(bytesAvailable<10){
+                    bufferSize=bytesAvailable;
+                }else{
+                    bufferSize=bytesAvailable;
+                }//max buffer size is 10
                 byte[] buffer = new byte[bufferSize];
 
                 int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
@@ -257,7 +259,11 @@ public class QuizDetail extends AppCompatActivity {
                 while (bytesRead > 0) {
                     dataos.write(buffer, 0, bufferSize);
                     bytesAvailable = fileInputStream.available();
-                    bufferSize = Math.min(bytesAvailable, 10);
+                    if(bytesAvailable<10){
+                        bufferSize=bytesAvailable;
+                    }else{
+                        bufferSize=bytesAvailable;
+                    }
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
                     // System.out.println(progress);
                     Log.d("das","progress"+progress);
@@ -265,26 +271,15 @@ public class QuizDetail extends AppCompatActivity {
                     publishProgress((int) ((progress * 100) / (sourceFile.length())));
                     publishProgress(progress);
                 }
-
                 dataos.writeBytes("\r\n");
                 dataos.writeBytes("--" + "*****" + "--" + "\r\n");
+                net.getResponseCode();
 
-                // Responses from the server (code and message)
-                serverResponseCode = net.getResponseCode();
-                //      String serverResponseMessage = net.getResponseMessage();
-                if (serverResponseCode == 200) {
-                }
-                fileInputStream.close();
-                dataos.flush();
-                dataos.close();
-                //} catch (Exception e) {
-                //  e.printStackTrace();
-                //}
 
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            return "Done";
+            return null;
         }
 
         @Override
